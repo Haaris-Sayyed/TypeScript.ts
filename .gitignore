@@ -1,0 +1,16 @@
+.DS_Store
+
+*.css
+
+node_modules
+
+.vscode
+
+*.js
+*.d.ts
+*.js.map  
+
+
+
+
+
