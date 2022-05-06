@@ -466,28 +466,31 @@ namespace DataAccess {
     delete(todoId: number): void;
     getAll(): Todo[];
     getById(todoId: number): Todo;
-}
-
+  }
 }
 
 // ########################## Decorators ##########################
 
 // method decorators (applied by adding @methodDecoratorName before method)
 
-function log(target: Object, methodName: string, descriptor: TypedPropertyDescriptor<Function>) {
-
+function log(
+  target: Object,
+  methodName: string,
+  descriptor: TypedPropertyDescriptor<Function>
+) {
   let originalMethod = descriptor.value;
 
-  descriptor.value = function(...args) {
+  descriptor.value = function (...args) {
+    console.log(`${methodName}(${JSON.stringify(args)})`);
 
-      console.log(`${methodName}(${JSON.stringify(args)})`)
+    let returnValue = originalMethod.apply(this, args);
 
-      let returnValue = originalMethod.apply(this, args);
+    console.log(
+      `${methodName}(${JSON.stringify(args)}) => ${JSON.stringify(returnValue)}`
+    );
 
-      console.log(`${methodName}(${JSON.stringify(args)}) => ${JSON.stringify(returnValue)}`)
-
-      return returnValue;
-  }
+    return returnValue;
+  };
 }
 
 // other types of decorators are mentioned in Validators.ts file
